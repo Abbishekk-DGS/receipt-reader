@@ -7,6 +7,32 @@
 <!-- author-banner -->
 > **Project 07 of 20** in my AI build series, designed and built by **[Abbishekk DGS](https://abbishekkdgs.tech)**. [See all projects →](https://github.com/Abbishekk-DGS)
 
+<!-- overview:start -->
+## Overview
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/overview-dark.svg">
+  <img alt="receipt-reader overview: how it works and its output. Key numbers: 11.7 s synthetic blurred receipt; 1 / 1 sample, every number right; 2 repairs at most; Batch folder to spreadsheet. Stack: Python · RapidOCR · ONNX · Ollama · Pydantic · constrained decoding." src="docs/overview-light.svg" width="100%">
+</picture>
+
+## Interface
+
+It is one terminal command, and it takes single files or whole folders. There is no graphical app.
+
+```
+receipt-reader <files, folders or the word sample> [options]
+```
+
+| Option | What it does | Default |
+|---|---|---|
+| `--show-text` | Prints the rebuilt OCR layout | off |
+| `--csv` | Writes a summary spreadsheet with one row per document | |
+| `--model` | Ollama model | `qwen2.5:3b` |
+| `--out` | Output folder | `outputs` |
+
+Each document produces `outputs/<name>.json` with its status (`verified`, `needs_review` or `failed`), any problems, the attempt count, the OCR confidence and the extracted fields, and prints one summary line. `receipt-reader sample` only writes `samples/receipt.png` to try it on.
+<!-- overview:end -->
+
 ## Example
 
 Input: a blurred, slightly rotated photo of a restaurant bill (`receipt-reader sample` generates it). Output, `qwen2.5:3b`, first attempt, 11.7 s:
